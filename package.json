@@ -1,0 +1,101 @@
+{
+  "name": "eol-converter",
+  "displayName": "EOL Converter",
+  "description": "Convert End of Line Sequence between CRLF and LF for files and folders via right-click menu",
+  "version": "1.0.0",
+  "publisher": "oijusti",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oijusti/eol-converter-ext.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oijusti/eol-converter-ext/issues"
+  },
+  "homepage": "https://github.com/oijusti/eol-converter-ext#readme",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "end of line",
+    "crlf",
+    "lf",
+    "converter",
+    "oijusti"
+  ],
+  "sponsor": {
+    "url": "https://github.com/sponsors/oijusti"
+  },
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "eol-converter.convertToLF",
+        "title": "LF"
+      },
+      {
+        "command": "eol-converter.convertToCRLF",
+        "title": "CRLF"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "submenu": "eol-converter.eolMenu",
+          "when": "explorerResourceIsFolder || resourceLangId",
+          "group": "1_modification"
+        }
+      ],
+      "editor/context": [
+        {
+          "submenu": "eol-converter.eolMenu",
+          "when": "editorFocus",
+          "group": "1_modification"
+        }
+      ],
+      "eol-converter.eolMenu": [
+        {
+          "command": "eol-converter.convertToLF",
+          "group": "eol@1"
+        },
+        {
+          "command": "eol-converter.convertToCRLF",
+          "group": "eol@2"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "eol-converter.convertToLF",
+          "when": "false"
+        },
+        {
+          "command": "eol-converter.convertToCRLF",
+          "when": "false"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "eol-converter.eolMenu",
+        "label": "Change End of Line Sequence",
+        "icon": "$(symbol-enum)"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.1",
+    "@types/vscode": "^1.78.0",
+    "typescript": "^5.0.4",
+    "@vscode/vsce": "^2.15.0"
+  }
+}
